@@ -309,20 +309,25 @@ let data = [
 // wajib ada yang menggunakan array method FIND, FILTER atau MAP dalam pengerjaannya.
 
 // 1) display/print person yang registered dibawah tahun 2022
-console.log("--------No1-------")
-console.log(data.filter(e => {
-    return parseInt(e.registered.substring(0, 4)) < 2022
-}))
+console.log("=========menggunakan perulangan=============")
+console.log("=======================No1==================")
+for(let i=0; i<data.length; i++) {
+  if(data[i].registered.substring(0, 4) <2022){
+    console.log(data[i])
+  }
+}
 
 // 2) display person yang address nya Bali
-console.log("--------No2-------")
+console.log("=========menggunakan array method=============")
+console.log("=======================No2==================")
 let filterAddress = data.filter(x => {
     return x.address === "Bali"
 })
 console.log(filterAddress)
 
 // 3) display friends yang hobby nya football
-console.log("--------No3-------")
+console.log("=========menggunakan perulangan=============")
+console.log("=======================No3==================")
 for(let i=0; i<data.length; i++){
     for(let j=0; j<data[i].friends.length; j++){
         for(let k=0;k<data[i].friends[j].hobby.length; k++){
@@ -333,8 +338,18 @@ for(let i=0; i<data.length; i++){
     }
 }
 
+console.log("=========menggunakan array method=============")
+console.log("=======================No3==================")
+let filterHobby = data.filter(x => {
+  return x.friends.filter(y => {
+    return y.hobby === "football"
+  })
+})
+console.log(filterHobby)
+
 // 4) display hobby dari friends id 2
-console.log("--------No4-------")
+console.log("=========menggunakan array method=============")
+console.log("=======================No4==================")
 let filterId = data.map(x => {
   return x.friends.filter(y => {
     return y.id === 2
@@ -343,16 +358,25 @@ let filterId = data.map(x => {
 console.log(filterId)
 
 // 5) display friends yang gender nya male dan mempunyai hobby basketball
-console.log("--------No5-------")
-let filterFriend = data.filter(x=>{
-  return x.friends.filter(y=>{
-      return y.gender==="male" && y.hobby==="basketball"
+console.log("=========menggunakan array method=============")
+console.log("=======================No5==================")
+let filterFriends = data.map(x=>{
+  // console.log(x)
+  return x.friends.filter(function checkGender(y) {
+    // console.log(y)
+      if(y.gender==="male") {
+        return y.hobby.filter(function checkHoby(data) {
+          // console.log(hobby.hobby === "basketball")
+          return data.hobby === "basketball"
+        })
+      }
   })
 })
-console.log(filterFriend)
+console.log(filterFriends)
 
 // 6) display friends yang isActive nya true dan gender nya female dan favorite fruit nya strawberry
-console.log("--------No6-------")
+console.log("=========menggunakan array method=============")
+console.log("=======================No6==================")
 let filterGender = data.map(x => {
   return x.friends.filter(y => {
       if (y.gender === "female") {
@@ -363,7 +387,8 @@ let filterGender = data.map(x => {
 console.log(filterGender)
 
 // 7) display siapa saja yang mempunyai teman name Theresia
-console.log("--------No7-------")
+console.log("=========menggunakan array method=============")
+console.log("=======================No7==================")
 let filterName = data.filter(x => {
   return x.friends.filter(y => {
     return y.name === "Theresia"
@@ -372,7 +397,8 @@ let filterName = data.filter(x => {
 console.log(filterName)
 
 // 8) display hobby id 1 dari friends yang isActive nya true
-console.log("--------No8-------")
+console.log("=========menggunakan array method=============")
+console.log("=======================No8==================")
 let filterActive = data.filter(x => {
   return x.friends.filter(y => {
     return y.id === 1 && y.isActive === true
@@ -381,4 +407,32 @@ let filterActive = data.filter(x => {
 console.log(filterActive)
 
 // 9) display person yang eye color nya brown dan favorite fruit nya banana dan mempunyai teman hobby basketball
+console.log("=========menggunakan perulangan=============")
+console.log("=======================No9==================")
+for (let i=0; i<data.length; i++) {
+  if (data[i].eyeColor==="brown") {
+    for (let j=0; j<data[i].friends.length; j++) {
+      if (data[i].friends[j].favoriteFruit==="banana") {
+        for (let k=0; k<data[i].friends[j].hobby.length; k++) {
+          if (data[i].friends[j].hobby[k].hobby==="basketball") {
+            console.log(data[i])
+          }
+        }
+      } 
+    }
+  }
+}
+
+
 // 10) display person yang mempunya friends gender male atau favorite fruit nya banana dan registered di tahun 2023
+console.log("=========menggunakan perulangan=============")
+console.log("=======================No10==================")
+for (let i=0; i<data.length; i++) {
+  for(let j=0; j<data[i].friends.length; j++){
+    if(data[i].registered="2023"){
+      if(data[i].friends[j].gender==="male" || data[i].friends[j].favoriteFruit==="banana"){
+        console.log(data[i])
+      }
+    }
+  }
+}
